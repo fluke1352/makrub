@@ -17,13 +17,13 @@ def draw_object(img, classifier, scaleFactor, minNeighbors, color):
 def detect(img, faceCascade, img_id):
     img, position = draw_object(img, faceCascade, 1.1, 10, (0, 0, 0))
     if len(position) == 4:
-        id = 62070XXX # XXX = studenID you can use for loop auto run studenID
+        id = 62070XXX # XXX = studentID you can use for loop auto run studentID
         cut_face = img[position[1]:position[1]+position[3], position[0]:position[0]+position[2]]
         dataset(cut_face, id, img_id)
     return img
 
 img_id = 0
-cap = cv2.VideoCapture("62070XXX.jpg")#XXX = studenID you can use for loop auto run studenID
+cap = cv2.VideoCapture("62070XXX.jpg")#XXX = studentID you can use for loop auto run studentID
 
 # while True:
 ret, frame = cap.read()
