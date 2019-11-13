@@ -1,7 +1,8 @@
 import numpy as np #pip install numpy
-from PIL import Image #pip install Pillow==2.2.2
-import os #pip install os-win
+from PIL import Image #pip install Pillow
+import os
 import cv2 #pip install opencv-python
+#pip install opencv-contrib-python
 
 def train(data):
     path = [os.path.join(data, i) for i in os.listdir(data)]
