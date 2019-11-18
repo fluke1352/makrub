@@ -1,4 +1,5 @@
 import cv2
+import xlsxwriter
 faceCascade = cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
 member = set()
 
@@ -26,6 +27,19 @@ def detect(img, faceCascade, img_id, clf):
         cut_face = img[position[1]:position[1]+position[3], position[0]:position[0]+position[2]]
     return img
 
+def create(member):
+    """create exceil fire"""
+    member_ = xlsxwriter.Workbook('member.xlsx')
+    worksheet = member_.add_worksheet()
+    member = list(member)
+    member.sort()
+    row = 0
+    column = 0
+    for i in member:
+        worksheet.write(row, column, i)
+        row += 1
+    member_.close()
+
 img_id = 1
 camera = cv2.VideoCapture(0)
 
@@ -39,9 +53,7 @@ while True:
     img_id += 1
     if cv2.waitKey(1) & 0xFF == ord('q'):
         print(member)
-        text = open("member", "+w")
-        [text.write(str(i)) for i in member]
-        text.close
+        create(member)
         break
 camera.release()
 cv2.destroyAllWindows()
