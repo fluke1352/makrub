@@ -4,6 +4,7 @@ faceCascade = cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
 member = set()
 
 def draw_object(img, classifier, scaleFactor, minNeighbors, color, clf):
+    """สร้างกรอบ มาแสกนจับใบหน้า"""
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     features = classifier.detectMultiScale(gray, scaleFactor, minNeighbors)
     position = []
@@ -21,14 +22,15 @@ def draw_object(img, classifier, scaleFactor, minNeighbors, color, clf):
     return img, position
 
 def detect(img, faceCascade, img_id, clf):
+    """ทำการตัดรูป เอามาใช้เฉพาะแค่ใบหน้า"""
     img, position = draw_object(img, faceCascade, 1.1, 10, (0, 0, 255), clf)
     if len(position) == 4:
-        # id = 62070
+        # รหัสนักศึกษา 62070XXXX
         cut_face = img[position[1]:position[1]+position[3], position[0]:position[0]+position[2]]
     return img
 
 def create(member):
-    """create exceil fire"""
+    """สร้างไฟล์ excel"""
     member_ = xlsxwriter.Workbook('member.xlsx')
     worksheet = member_.add_worksheet()
     member = list(member)
@@ -55,5 +57,5 @@ while True:
         print(member)
         create(member)
         break
-camera.release()
-cv2.destroyAllWindows()
+camera.release() # เปิดกล้อง
+cv2.destroyAllWindows() # ล้าง cache memory
