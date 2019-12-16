@@ -11,7 +11,7 @@ def train(data):
     id_ = []
 
     for icon in path:
-        """สร้างลูปมาเพื่อเปลี่ยนไฟล์ภาพเป็นไฟล์.xmlเพื่อเปรียบเทียบหน้าคน"""
+    """สร้างลูปมาเพื่อเปลี่ยนไฟล์ภาพเป็นไฟล์.xmlเพื่อเปรียบเทียบหน้าคน"""
         img = Image.open(icon).convert("L")
         iconNp = np.array(img, "uint8")
         id = int(os.path.split(icon)[1].split(".")[1])#cut .jpg
